@@ -1,0 +1,52 @@
+package com.in28minutes.webdriver.basics;
+
+import java.util.concurrent.TimeUnit;
+import java.util.Set;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.testng.annotations.Test;
+
+@Test
+public class Webdriverbasics {
+  public void f() throws InterruptedException {
+	  
+	  System.setProperty("webdriver.edge.driver",
+			  "C:\\selenium webdriver\\edge driver\\msedgedriver.exe");
+//		WebDriver driver = new EdgeDriver();
+//		driver.manage().window().maximize() ;
+//		driver.get("https://www.linkedin.com/");
+	  WebDriver driver = new EdgeDriver();
+	  driver.manage().window().maximize() ;
+	  driver.get("https://www.amazon.in/");
+	  driver.findElement(By.id("twotabsearchtextbox")).sendKeys("Watches for women");
+	  //search.sendKeys("manam");
+	 driver.findElement(By.id("nav-search-submit-button")).click();
+	  //driver.findElement(By.xpath("/html/body/div[1]/div[2]/div[1]/div[2]/div/div[3]/span/div[1]/div/div/div[4]/ul/span[1]/li/span/a/span")).click();
+	  
+	  driver.findElement(By.xpath("//*[@id=\"search\"]/div[1]/div[1]/div/span[1]/div[1]/div[4]/div/div/div/div/span/div/div/div[2]/div[1]/h2/a/span")).click();
+	  Thread.sleep(5000);
+	  driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS) ;
+	  
+	  String amazonWindowHandle = driver.getWindowHandle();
+      // Get all window handles
+      Set<String> allWindowHandles = driver.getWindowHandles();
+
+      // Iterate over all window handles
+      for (String windowHandle : allWindowHandles) {
+          // Switch to the new tab (if it's not the Amazon original page)
+          if (!windowHandle.equals(amazonWindowHandle)) {
+              driver.switchTo().window(windowHandle);
+              driver.findElement(By.id("add-to-cart-button")).click();
+             
+              // Perform actions on the new tab (e.g., interact with elements)
+              // ...           
+             // driver.close();
+          }
+      }
+      // Switching  back to the original Amazon page
+      driver.switchTo().window(amazonWindowHandle);
+	  
+//	  driver.quit();
+  }
+}
