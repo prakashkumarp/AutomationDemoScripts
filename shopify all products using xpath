@@ -1,0 +1,23 @@
+package first;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.edge.EdgeDriver;
+// 1. shopify webpage finding all products button in solutions tab using xpath (href attribute)
+//2. shopify webpage finding marketing button in resources tab using xpath (href attribute)
+public class sel {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+System.setProperty("webdriver.edge.driver",
+        "C:\\selenium webdriver\\edge driver\\msedgedriver.exe");
+WebDriver driver = new EdgeDriver();
+driver.manage().window().maximize() ;
+//driver.get("https://www.amazon.in/");
+driver.get("https://www.shopify.com/");
+driver.findElement(By.xpath("/html/body/div[2]/header/div[1]/div/div/nav/ul/li[1]/div[1]/button")).click();
+// finding all products button using href in xpath.
+driver.findElement(By.xpath("//a[@href='/products']")).click();
+// another example to find out marketing button in resources page on shopify website
+driver.findElement(By.xpath("/html/body/div[2]/header/div[1]/div/div/nav/ul/li[3]/div[1]/button/span")).click();
+driver.findElement(By.xpath("//a[@href='/blog/marketing-plan']")).click();
