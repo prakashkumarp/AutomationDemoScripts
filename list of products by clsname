@@ -1,0 +1,41 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.List;
+
+public class ProductListFinder {
+    public static void main(String[] args) {
+
+        // Set path to chromedriver if needed
+        // System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        WebDriver driver = new ChromeDriver();
+
+        // Open the website
+        driver.get("https://bstackdemo.com");
+
+        // Wait for the products to load (can be replaced with explicit wait)
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Find all product elements by class name
+        List<WebElement> products = driver.findElements(By.className("shelf-item"));
+
+        // Print total count
+        System.out.println("Total products found: " + products.size());
+
+        // Print product names
+        for (WebElement product : products) {
+            WebElement nameElement = product.findElement(By.className("shelf-item__title"));
+            System.out.println("Product: " + nameElement.getText());
+        }
+
+        // Close browser
+        driver.quit();
+    }
+}
