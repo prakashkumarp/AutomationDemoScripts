@@ -1,0 +1,24 @@
+package automation;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class DemoScript {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+System.setProperty("webdriver.chrome.driver","C:\\chromedriver\\chromedriver-win64\\chromedriver.exe");
+ChromeDriver driver = new ChromeDriver();
+driver.get("https://bstackdemo.com/");
+
+
+//to check if the logo is displayed or not on the homepage of bstackdemo 
+// using css selector
+boolean el = driver.findElement(By.cssSelector(".Navbar_logo__26S5Y")).isDisplayed();
+System.out.println(el);
+driver.close();
+
+}
+
+}
